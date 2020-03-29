@@ -1,3 +1,5 @@
+from typing import Type, List
+
 class Node(object):
   def __init__(self, coordinates : list):
     self.x = coordinates[0];
