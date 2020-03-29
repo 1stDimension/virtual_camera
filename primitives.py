@@ -14,3 +14,17 @@ class Edge(object):
     self.end = end
   def __str__(self):
     return f"begin = ({self.begin}), end = ({self.end})"
+
+class WorldObject(object):
+  def __init__(self):
+    self.nodes : list = []
+    self.edges : list = []
+  
+  def add_nodes(self, nodes : List[Type[Node]]):
+    for node in nodes:
+      self.nodes.append(node)
+
+  def add_edges(self, edges : List[Type[Edge]]):
+    for edge in edges:
+      self.edges.append(edge)
+
