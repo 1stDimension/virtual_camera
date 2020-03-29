@@ -28,3 +28,8 @@ class WorldObject(object):
     for edge in edges:
       self.edges.append(edge)
 
+  def print_nodes(self):
+    print(self.nodes)
+
+  def print_edges(self):
+    print(self.edges)
