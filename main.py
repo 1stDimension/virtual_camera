@@ -74,6 +74,21 @@ print("Model")
 print(model)
 print()
 ### Eve
+position = np.array([
+  0,0,0,1
+])
+gaze = np.array([0,0,-1])
+view_up = np.array([0,1,0])
+w = -1 * gaze / np.linalg.norm(gaze)
+cross = np.cross(view_up, w)
+u = cross / np.linalg.norm(cross) 
+v = np.cross(w,u)
+eye_rotation = np.identity(4)
+eye_rotation[0,:-1] = u
+eye_rotation[1,:-1] = v
+eye_rotation[2,:-1] = w
+eye_transform = np.identity(4)
+eye_transform[:-1,-1] = -position
 
 ##
 view_matrix = np.array(
