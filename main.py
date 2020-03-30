@@ -54,6 +54,7 @@ b = -100
 t = 100
 n = 100
 f = -100
+
 model = np.array(
     [
         [2 / (r - l), 0, 0, 0],
@@ -74,21 +75,19 @@ print("Model")
 print(model)
 print()
 ### Eve
-position = np.array([
-  0,0,150
-])
-gaze = np.array([0,0,-1])
-view_up = np.array([0,1,0])
+position = np.array([0, 0, 150])
+gaze = np.array([0, 0, -1])
+view_up = np.array([0, 1, 0])
 w = -1 * gaze / np.linalg.norm(gaze)
 cross = np.cross(view_up, w)
-u = cross / np.linalg.norm(cross) 
-v = np.cross(w,u)
+u = cross / np.linalg.norm(cross)
+v = np.cross(w, u)
 eye_rotation = np.identity(4)
-eye_rotation[0,:-1] = u
-eye_rotation[1,:-1] = v
-eye_rotation[2,:-1] = w
+eye_rotation[0, :-1] = u
+eye_rotation[1, :-1] = v
+eye_rotation[2, :-1] = w
 eye_transform = np.identity(4)
-eye_transform[:-1,-1] = -position
+eye_transform[:-1, -1] = -position
 
 ##
 view_matrix = eye_rotation @ eye_transform
@@ -97,12 +96,9 @@ print("view_matrix")
 print(view_matrix)
 print()
 ###
-projection_matrix = np.array([
-  [1,0,0,0],
-  [0,1,0,0],
-  [0,0,(n+f)/n,-f],
-  [0,0,1/n, 0],
-])
+projection_matrix = np.array(
+    [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, (n + f) / n, -f], [0, 0, 1 / n, 0],]
+)
 
 ###
 object_matrix = canonical_to_pixel @ model
@@ -120,26 +116,21 @@ matrix_o_p_v = object_matrix @ projection_matrix @ view_matrix
 # print(nodes)
 
 ### Move to the left
-shift = np.array([
-  [1,0,0,0],
-  [0,1,0,0],
-  [0,0,1,0],
-  [0,0,0,1],
-])
+shift = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1],])
 for node in nodes:
-  node.coordinates = shift @ node.coordinates
+    node.coordinates = shift @ node.coordinates
 
 screen = pg.display.set_mode(dimensions)
 for edge in edges:
     begin = edge.begin.coordinates
-    end   = edge.end.coordinates
+    end = edge.end.coordinates
     print(f"w_begin = {begin}, w_end = {end}")
-    begin = (matrix_o_p_v @ begin)
-    end   = (matrix_o_p_v @ end)
+    begin = matrix_o_p_v @ begin
+    end = matrix_o_p_v @ end
     begin = begin / begin[-1]
-    end   = end / end[-1]
+    end = end / end[-1]
     # print(f"begin = {begin}, end = {end}")
-    pg.draw.circle(screen, (255,0,0), begin[:2].astype(int),3)
+    pg.draw.circle(screen, (255, 0, 0), begin[:2].astype(int), 3)
     # pg.draw.circle(screen, (255,0,0), end[:2].astype(int),3)
     pg.draw.aaline(screen, 255, begin[:2], end[:2], 0)
     # print(edge)
