@@ -120,8 +120,12 @@ matrix_o_p_v = object_matrix @ projection_matrix @ view_matrix
 # print(nodes)
 screen = pg.display.set_mode(dimensions)
 for edge in edges:
-    begin = object_matrix @ edge.begin.coordinates
-    end = object_matrix @ edge.end.coordinates
+    begin = edge.begin.coordinates
+    end   = edge.end.coordinates
+    begin = (matrix_o_p_v @ begin)
+    end   = (matrix_o_p_v @ end)
+    begin = begin / begin[-1]
+    end   = end / end[-1]
     pg.draw.aaline(screen, 255, begin[:2], end[:2], 0)
     # print(edge)
     # print(f"begin = {begin} end ={end}")
