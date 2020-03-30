@@ -126,6 +126,9 @@ for edge in edges:
     end   = (matrix_o_p_v @ end)
     begin = begin / begin[-1]
     end   = end / end[-1]
+    # print(f"begin = {begin}, end = {end}")
+    pg.draw.circle(screen, (255,0,0), begin[:2].astype(int),3)
+    # pg.draw.circle(screen, (255,0,0), end[:2].astype(int),3)
     pg.draw.aaline(screen, 255, begin[:2], end[:2], 0)
     # print(edge)
     # print(f"begin = {begin} end ={end}")
