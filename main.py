@@ -118,6 +118,17 @@ print()
 matrix_o_p_v = object_matrix @ projection_matrix @ view_matrix
 # print("nodes")
 # print(nodes)
+
+### Move to the left
+shift = np.array([
+  [1,0,0,0],
+  [0,1,0,0],
+  [0,0,1,0],
+  [0,0,0,1],
+])
+for node in nodes:
+  node.coordinates = shift @ node.coordinates
+
 screen = pg.display.set_mode(dimensions)
 for edge in edges:
     begin = edge.begin.coordinates
