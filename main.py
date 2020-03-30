@@ -91,14 +91,8 @@ eye_transform = np.identity(4)
 eye_transform[:-1,-1] = -position
 
 ##
-view_matrix = np.array(
-  [
-    [1, 0, 0, 0],
-    [0, 1, 0, 0],
-    [0, 0, 1, 0],
-    [0, 0, 0, 1]
-  ]
-  )
+view_matrix = eye_rotation @ eye_transform
+
 print("view_matrix")
 print(view_matrix)
 print()
