@@ -96,7 +96,15 @@ view_matrix = eye_rotation @ eye_transform
 print("view_matrix")
 print(view_matrix)
 print()
-##
+###
+projection_matrix = np.array([
+  [1,0,0,0],
+  [0,1,0,0],
+  [0,0,(n+f)/n,-f],
+  [0,0,1/n, 0],
+])
+
+###
 object_matrix = canonical_to_pixel @ model
 print("Object matrix")
 print(object_matrix)
