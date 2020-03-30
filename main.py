@@ -133,6 +133,7 @@ screen = pg.display.set_mode(dimensions)
 for edge in edges:
     begin = edge.begin.coordinates
     end   = edge.end.coordinates
+    print(f"w_begin = {begin}, w_end = {end}")
     begin = (matrix_o_p_v @ begin)
     end   = (matrix_o_p_v @ end)
     begin = begin / begin[-1]
