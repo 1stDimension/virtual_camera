@@ -88,13 +88,6 @@ print(canonical_to_pixel)
 print()
 
 ###
-def multi(x):
-    return x
-
-
-gen = list(map(multi, nodes))
-# print("GEN")
-# print(gen)
 # print("nodes")
 # print(nodes)
 screen = pg.display.set_mode(dimensions)
@@ -103,7 +96,7 @@ for edge in edges:
     end = object_matrix @ edge.end.coordinates
     pg.draw.aaline(screen, 255, begin[:2], end[:2], 0)
     # print(edge)
-    print(f"begin = {begin} end ={end}")
+    # print(f"begin = {begin} end ={end}")
 
 pg.display.flip()
 
