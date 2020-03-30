@@ -75,7 +75,7 @@ print(model)
 print()
 ### Eve
 position = np.array([
-  0,0,0
+  0,0,150
 ])
 gaze = np.array([0,0,-1])
 view_up = np.array([0,1,0])
