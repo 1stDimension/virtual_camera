@@ -114,6 +114,8 @@ print(canonical_to_pixel)
 print()
 
 ###
+# object_view_matrix = object_matrix @ view_matrix
+matrix_o_p_v = object_matrix @ projection_matrix @ view_matrix
 # print("nodes")
 # print(nodes)
 screen = pg.display.set_mode(dimensions)
