@@ -36,9 +36,9 @@ dimensions = (width, height) = (600, 600)
 # matrix multiplication
 canonical_to_pixel = np.array(
     [
-        [width / 2, 0, 0, (width - 1) / 2],
-        [0, -height / 2, 0, (height - 1) / 2],
-        [0, 0, -1, 0],
+        [-width / 2, 0, 0, (width - 1) / 2],
+        [0, height / 2, 0, (height - 1) / 2],
+        [0, 0, 1, 0],
         [0, 0, 0, 1],
     ]
 )
