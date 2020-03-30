@@ -73,10 +73,19 @@ model = np.array(
 print("Model")
 print(model)
 print()
-###
-eye_position = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
-print("Eye position")
-print(eye_position)
+### Eve
+
+##
+view_matrix = np.array(
+  [
+    [1, 0, 0, 0],
+    [0, 1, 0, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 1]
+  ]
+  )
+print("view_matrix")
+print(view_matrix)
 print()
 ##
 object_matrix = canonical_to_pixel @ model
