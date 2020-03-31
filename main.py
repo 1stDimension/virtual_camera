@@ -121,25 +121,26 @@ for node in nodes:
     node.coordinates = shift @ node.coordinates
 
 screen = pg.display.set_mode(dimensions)
-matrix_o_p_v = object_matrix @ projection_matrix @ np.linalg.inv(camera)  @ view_matrix
-screen.fill(0)
-for edge in edges:
-    begin = edge.begin.coordinates
-    end = edge.end.coordinates
-    print(f"w_begin = {begin}, w_end = {end}")
-    begin = matrix_o_p_v @ begin
-    end = matrix_o_p_v @ end
-    begin = begin / begin[-1]
-    end = end / end[-1]
-    # print(f"begin = {begin}, end = {end}")
-    pg.draw.circle(screen, (255, 0, 0), begin[:2].astype(int), 3)
-    # pg.draw.circle(screen, (255,0,0), end[:2].astype(int),3)
-    pg.draw.aaline(screen, (255,255,255), begin[:2], end[:2], 1)
-    # print(edge)
-    # print(f"begin = {begin} end ={end}")
+def draw(screen, object_m, projection, camera, view, edges):
+    matrix_o_p_v = object_m @ projection @ np.linalg.inv(camera)  @ view
+    screen.fill(0)
+    for edge in edges:
+        begin = edge.begin.coordinates
+        end = edge.end.coordinates
+        # print(f"w_begin = {begin}, w_end = {end}")
+        begin = matrix_o_p_v @ begin
+        end = matrix_o_p_v @ end
+        begin = begin / begin[-1]
+        end = end / end[-1]
+        # print(f"begin = {begin}, end = {end}")
+        pg.draw.circle(screen, (255, 0, 0), begin[:2].astype(int), 3)
+        # pg.draw.circle(screen, (255,0,0), end[:2].astype(int),3)
+        pg.draw.aaline(screen, (255,255,255), begin[:2], end[:2], 1)
+        # print(edge)
+        # print(f"begin = {begin} end ={end}")
+    pg.display.flip()
 
-pg.display.flip()
-
+draw(screen, object_matrix, projection_matrix, camera, view_matrix, edges)
 
 running = True
 while running:
