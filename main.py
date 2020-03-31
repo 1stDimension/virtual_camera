@@ -122,6 +122,7 @@ for node in nodes:
 
 screen = pg.display.set_mode(dimensions)
 matrix_o_p_v = object_matrix @ projection_matrix @ np.linalg.inv(camera)  @ view_matrix
+screen.fill(0)
 for edge in edges:
     begin = edge.begin.coordinates
     end = edge.end.coordinates
