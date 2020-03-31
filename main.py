@@ -111,7 +111,7 @@ print()
 
 ###
 # object_view_matrix = object_matrix @ view_matrix
-matrix_o_p_v = object_matrix @ projection_matrix @ view_matrix
+camera = np.identity(4);
 # print("nodes")
 # print(nodes)
 
@@ -121,6 +121,7 @@ for node in nodes:
     node.coordinates = shift @ node.coordinates
 
 screen = pg.display.set_mode(dimensions)
+matrix_o_p_v = object_matrix @ projection_matrix @ np.linalg.inv(camera)  @ view_matrix
 for edge in edges:
     begin = edge.begin.coordinates
     end = edge.end.coordinates
