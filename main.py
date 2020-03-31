@@ -147,3 +147,28 @@ while running:
         if event.type == pg.QUIT:
             running = False
             pg.quit()
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_w:
+                print('w')
+            if event.key == pg.K_s:
+                print('s')
+            if event.key == pg.K_a:
+                print('a')
+            if event.key == pg.K_d:
+                print('d')
+            if event.key == pg.K_q:
+                print('q')
+            if event.key == pg.K_e:
+                print('e')
+            if event.key == pg.K_w and pygame.key.get_mods() & pygame.KMOD_SHIFT:
+                print('w + shift')
+            if event.key == pg.K_s and pygame.key.get_mods() & pygame.KMOD_SHIFT:
+                print('s + shift')
+            if event.key == pg.K_w and pygame.key.get_mods() & pygame.KMOD_CTRL:
+                print('w')
+            if event.key == pg.K_s and pygame.key.get_mods() & pygame.KMOD_CTRL:
+                print('s')
+            if event.key == pg.K_a and pygame.key.get_mods() & pygame.KMOD_CTRL:
+                print('a')
+            if event.key == pg.K_d and pygame.key.get_mods() & pygame.KMOD_CTRL:
+                print('d')
