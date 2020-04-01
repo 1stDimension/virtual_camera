@@ -13,3 +13,9 @@ X
 Y
 
 ![X translation](./translation_y.gif)
+
+Z
+
+![X translation](./translation_z.gif)
+
+### Rotation
