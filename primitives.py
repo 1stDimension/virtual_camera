@@ -33,8 +33,8 @@ class WorldObject(object):
             self.edges.append(edge)
 
     def print_nodes(self):
-        print(self.nodes)
+        print(self.nodes[:])
 
     def print_edges(self):
-        print(self.edges)
+        print(self.edges[:])
 
