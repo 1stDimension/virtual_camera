@@ -19,3 +19,7 @@ Z
 ![X translation](./translation_z.gif)
 
 ### Rotation
+
+Z
+
+![Z rotation](./rotation_z.gif)
