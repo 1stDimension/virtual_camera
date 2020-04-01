@@ -20,6 +20,10 @@ Z
 
 ### Rotation
 
+X
+
+![Z rotation](./rotation_x.gif)
+
 Z
 
 ![Z rotation](./rotation_z.gif)
