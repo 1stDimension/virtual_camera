@@ -22,7 +22,11 @@ Z
 
 X
 
-![Z rotation](./rotation_x.gif)
+![X rotation](./rotation_x.gif)
+
+Y
+
+![Y rotation](./rotation_y.gif)
 
 Z
 
