@@ -2,32 +2,32 @@
 
 ## Demonstration
 
-![basic movement](./animation.gif)
+![basic movement](./assets/animation.gif)
 
 ### Translation
 
 X
 
-![X translation](./translation_x.gif)
+![X translation](./assets/translation_x.gif)
 
 Y
 
-![X translation](./translation_y.gif)
+![X translation](./assets/translation_y.gif)
 
 Z
 
-![X translation](./translation_z.gif)
+![X translation](./assets/translation_z.gif)
 
 ### Rotation
 
 X
 
-![X rotation](./rotation_x.gif)
+![X rotation](./assets/rotation_x.gif)
 
 Y
 
-![Y rotation](./rotation_y.gif)
+![Y rotation](./assets/rotation_y.gif)
 
 Z
 
-![Z rotation](./rotation_z.gif)
+![Z rotation](./assets/rotation_z.gif)
