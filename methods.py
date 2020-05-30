@@ -28,6 +28,13 @@ def draw_triangle(screen, matrix, triangle):
         map(lambda x: homogenize(matrix @ x.coordinates), current_triangle_nodes,)
     )
     colour = triangle.colour
+    # wrong should be if outside of canonical volume
+    if (
+        screen_cordinates[0][2] > 0
+        or screen_cordinates[1][[2]] > 0
+        or screen_cordinates[2][2] > 0
+    ):
+        return
     coordinates = list(map(lambda x: x[:2], screen_cordinates))
     pg.draw.polygon(screen, colour, coordinates, 0)
 
