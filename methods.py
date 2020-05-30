@@ -53,16 +53,7 @@ def draw(screen, object_m, projection, camera, view, nodes, triangles):
     # continue
 
     for triangle in triangles:
-        current_triangle_nodes = triangle.nodes()
-        screen_cordinates = list(
-            map(
-                lambda x: homogenize(matrix_o_p_v @ x.coordinates),
-                current_triangle_nodes,
-            )
-        )
-        colour = triangle.colour
-        coordinates = list(map(lambda x: x[:2], screen_cordinates))
-        pg.draw.polygon(screen, colour, coordinates, 0)
+        draw_triangle(screen, matrix_o_p_v, triangle)
     # print(f"begin = {begin}, end = {end}")
     # pg.draw.circle(screen, (255, 0, 0), begin[:2].astype(int), 3)
     # pg.draw.circle(screen, (255,0,0), end[:2].astype(int),3)
