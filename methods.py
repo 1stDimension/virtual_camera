@@ -5,8 +5,31 @@ import pygame as pg
 import numpy as np
 
 
+def normal(triangle):
+    # nodes = triangle.nodes()
+    edgeOne = triangle.two - triangle.one
+    edgeTwo = triangle.tree - triangle.one
+    # posible place of error
+    return np.cross(edgeOne, edgeTwo)
+
+
+def implicit_plane_function(point, triangle):
+    n = normal(triangle)
+    return (point - triangle.one) @ n
+
+
 def homogenize(vector):
     return vector / vector[-1]
+
+
+def draw_triangle(screen, matrix, triangle):
+    current_triangle_nodes = triangle.nodes()
+    screen_cordinates = list(
+        map(lambda x: homogenize(matrix @ x.coordinates), current_triangle_nodes,)
+    )
+    colour = triangle.colour
+    coordinates = list(map(lambda x: x[:2], screen_cordinates))
+    pg.draw.polygon(screen, colour, coordinates, 0)
 
 
 def draw(screen, object_m, projection, camera, view, nodes, triangles):
@@ -23,9 +46,6 @@ def draw(screen, object_m, projection, camera, view, nodes, triangles):
 
     for triangle in triangles:
         current_triangle_nodes = triangle.nodes()
-        for node in current_triangle_nodes:
-            coordinates = node.coordinates
-            coordinates = homogenize(matrix_o_p_v @ coordinates)
         screen_cordinates = list(
             map(
                 lambda x: homogenize(matrix_o_p_v @ x.coordinates),
