@@ -19,6 +19,13 @@ class Edge(object):
         return f"begin = ({self.begin}), end = ({self.end})"
 
 
+class Triangle(object):
+    def __init__(self, one, two, tree):
+        self.one = one
+        self.two = two
+        self.tree = tree
+
+
 class WorldObject(object):
     def __init__(self):
         self.nodes: list = []
@@ -37,4 +44,3 @@ class WorldObject(object):
 
     def print_edges(self):
         print(self.edges[:])
-

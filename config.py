@@ -1,0 +1,6 @@
+import numpy as np
+
+TRANSLATION_STEP = 10
+ROTATION_STEP = np.pi / 12
+
+DIMENSIONS = (WIDTH, HEIGHT) = (600, 600)
