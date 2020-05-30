@@ -3,7 +3,19 @@ import copy
 import numpy as np
 
 
-def move_z(x: Node):
+def move_z_triangle(x: Triangle):
+    for node in x.nodes:
+        move_z(node)
+    return x
+
+
+def flip_x_triangle(x: Triangle):
+    for node in x.nodes:
+        flip_x(node)
+    return x
+
+
+def move_z(x):
     tmp = np.identity(4)
     tmp[:-1, -1] = np.array([0, 0, -80])
     x.coordinates = tmp @ x.coordinates
@@ -19,6 +31,7 @@ def flip_x(x):
 
 def init() -> List[Type[Node]]:
     ### BEGIN SQUARE
+
     n0 = Node([10, -25, 50, 1])
     n1 = Node([50, -25, 50, 1])
     n2 = Node([50, 25, 50, 1])
@@ -56,49 +69,36 @@ def init() -> List[Type[Node]]:
     t10 = Triangle(n1, n5, n6)
     t11 = Triangle(n6, n2, n1)
 
-    e0_1 = Edge(n0, n1)
-    e1_2 = Edge(n1, n2)
-    e2_3 = Edge(n2, n3)
-    e3_0 = Edge(n3, n0)
+    right_first_building = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11]
 
-    e0_1 = Edge(n0, n1)
-    e1_2 = Edge(n1, n2)
-    e2_3 = Edge(n2, n3)
-    e3_0 = Edge(n3, n0)
+    right_second_building: list = copy.deepcopy(right_first_building)
+    list(map(move_z_triangle, right_second_building))
+    left_second_building = copy.deepcopy(right_second_building)
 
-    e4_5 = Edge(n4, n5)
-    e5_6 = Edge(n5, n6)
-    e6_7 = Edge(n6, n7)
-    e7_4 = Edge(n7, n4)
-
-    e0_4 = Edge(n0, n4)
-    e1_5 = Edge(n1, n5)
-    e2_6 = Edge(n2, n6)
-    e3_7 = Edge(n3, n7)
-
-    data = [n0, n1, n2, n3, n4, n5, n6, n7]
-    edges = [e0_1, e1_2, e2_3, e3_0, e4_5, e5_6, e6_7, e7_4, e0_4, e1_5, e2_6, e3_7]
-
-    square = WorldObject()
-    square.add_edges(edges)
-    square.add_nodes(data)
-
-    s1: WorldObject = copy.deepcopy(square)
-    list(map(move_z, s1.nodes))
-    s2 = copy.deepcopy(s1)
-    s3 = copy.deepcopy(square)
-
-    list(map(flip_x, s2.nodes))
-    list(map(flip_x, s3.nodes))
+    list(map(flip_x_triangle, left_second_building))
+    left_first_building = copy.deepcopy(right_first_building)
+    list(map(flip_x_triangle, left_first_building))
 
     r0 = Node([5, -25, 75, 1])
     r1 = Node([5, -25, -75, 1])
     r2 = Node([-5, -25, -75, 1])
     r3 = Node([-5, -25, 75, 1])
 
-    er0_1 = Edge(r0, r1)
-    er1_2 = Edge(r1, r2)
-    er2_3 = Edge(r2, r3)
-    er3_0 = Edge(r3, r0)
-    road = [er0_1, er1_2, er2_3, er3_0]
-    return square.edges + s1.edges + s2.edges + s3.edges + road
+    triangleRoad0 = Triangle(r0, r1, r2)
+    triangleRoad1 = Triangle(r2, r3, r0)
+
+    road = [triangleRoad0, triangleRoad1]
+    # return nodes and triangles
+
+    triangles = []
+    all_nodes = []
+    triangles.extend(right_first_building)
+    triangles.extend(right_second_building)
+    triangles.extend(left_second_building)
+    triangles.extend(left_first_building)
+    triangles.extend(road)
+
+    for triangle in triangles:
+        all_nodes.extend(triangle.nodes)
+
+    return all_nodes, triangles

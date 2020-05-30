@@ -1,5 +1,6 @@
 from typing import Type, List
 import numpy as np
+import copy
 
 
 class Node(object):
@@ -21,9 +22,12 @@ class Edge(object):
 
 class Triangle(object):
     def __init__(self, one, two, tree):
-        self.one = one
-        self.two = two
-        self.tree = tree
+        self.one = copy.deepcopy(one)
+        self.two = copy.deepcopy(two)
+        self.tree = copy.deepcopy(tree)
+
+    def nodes(self):
+        return [self.one, self.two, self.tree]
 
 
 class WorldObject(object):

@@ -9,31 +9,31 @@ def homogenize(vector):
     return vector / vector[-1]
 
 
-def drawTriangle(screen, object_m, projection, camera, view, edges):
-    matrix_o_p_v = object_m @ projection @ np.linalg.inv(camera) @ view
+def drawTriangle(screen):
+    print("ala")
+    # matrix_o_p_v = object_m @ projection @ np.linalg.inv(camera) @ view
 
 
-def draw(screen, object_m, projection, camera, view, edges):
+def draw(screen, object_m, projection, camera, view, nodes, triangles):
     matrix_o_p_v = object_m @ projection @ np.linalg.inv(camera) @ view
     screen.fill(0)
     # print("Camera")
     # print(camera)
-    for edge in edges:
-        begin = edge.begin.coordinates
-        end = edge.end.coordinates
+    for node in nodes:
         # print(f"w_begin = {begin}, w_end = {end}")
-        begin = matrix_o_p_v @ begin
-        end = matrix_o_p_v @ end
-        begin = homogenize(begin)
-        end = homogenize(end)
-        if begin[2] > 0 or end[2] > 0:
-            continue
-        # print(f"begin = {begin}, end = {end}")
-        pg.draw.circle(screen, (255, 0, 0), begin[:2].astype(int), 3)
-        # pg.draw.circle(screen, (255,0,0), end[:2].astype(int),3)
-        pg.draw.aaline(screen, (255, 255, 255), begin[:2], end[:2], 0)
-        # print(edge)
-        # print(f"begin = {begin} end ={end}")
+        coordinates = node.coordinates
+        coordinates = homogenize(matrix_o_p_v @ coordinates)
+        # if begin[2] > 0 or end[2] > 0:
+        # continue
+
+    for triangle in triangles:
+        print(triangle)
+    # print(f"begin = {begin}, end = {end}")
+    # pg.draw.circle(screen, (255, 0, 0), begin[:2].astype(int), 3)
+    # pg.draw.circle(screen, (255,0,0), end[:2].astype(int),3)
+    # pg.draw.aaline(screen, (255, 255, 255), begin[:2], end[:2], 0)
+    # print(edge)
+    # print(f"begin = {begin} end ={end}")
     pg.draw.circle(screen, (255, 0, 0), (WIDTH // 2, HEIGHT // 2), 10, 1)
     pg.display.flip()
 

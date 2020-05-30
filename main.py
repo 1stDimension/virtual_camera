@@ -5,7 +5,7 @@ from config import TRANSLATION_STEP, ROTATION_STEP, DIMENSIONS, WIDTH, HEIGHT
 import pygame as pg
 import numpy as np
 
-EDGES = init()
+NODES, TRIANGLES = init()
 # nodes = [n0, n1, n2, n3, n4, n5, n6, n7]
 ### END SQUARE
 # matrix multiplication
@@ -74,7 +74,7 @@ camera = np.identity(4)
 ### Move to the left
 screen = pg.display.set_mode(DIMENSIONS)
 
-draw(screen, object_matrix, projection_matrix, camera, view_matrix, EDGES)
+draw(screen, object_matrix, projection_matrix, camera, view_matrix, NODES, TRIANGLES)
 
 running = True
 while running:
@@ -171,4 +171,12 @@ while running:
                 )
                 shift = np.linalg.inv(shift)
                 camera = camera @ shift
-            draw(screen, object_matrix, projection_matrix, camera, view_matrix, EDGES)
+            draw(
+                screen,
+                object_matrix,
+                projection_matrix,
+                camera,
+                view_matrix,
+                NODES,
+                TRIANGLES,
+            )
