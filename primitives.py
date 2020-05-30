@@ -7,6 +7,9 @@ class Node(object):
     def __init__(self, coordinates: list):
         self.coordinates = np.array(coordinates)
 
+    def __repr__(self):
+        return f"coordinates = {self.coordinates}"
+
     def __str__(self):
         return f"coordinates = {self.coordinates}"
 
@@ -21,13 +24,21 @@ class Edge(object):
 
 
 class Triangle(object):
-    def __init__(self, one, two, tree):
+    def __init__(self, one, two, tree, colour=(0, 255, 0)):
         self.one = copy.deepcopy(one)
         self.two = copy.deepcopy(two)
         self.tree = copy.deepcopy(tree)
+        self.no = [self.one, self.two, self.tree]
+        self.colour = colour
+
+    def setColour(self, colour):
+        self.colour = colour
 
     def nodes(self):
-        return [self.one, self.two, self.tree]
+        return self.no
+
+    def __str__(self):
+        return f"{self.no}"
 
 
 class WorldObject(object):

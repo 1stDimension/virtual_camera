@@ -9,25 +9,32 @@ def homogenize(vector):
     return vector / vector[-1]
 
 
-def drawTriangle(screen):
-    print("ala")
-    # matrix_o_p_v = object_m @ projection @ np.linalg.inv(camera) @ view
-
-
 def draw(screen, object_m, projection, camera, view, nodes, triangles):
     matrix_o_p_v = object_m @ projection @ np.linalg.inv(camera) @ view
     screen.fill(0)
     # print("Camera")
     # print(camera)
-    for node in nodes:
-        # print(f"w_begin = {begin}, w_end = {end}")
-        coordinates = node.coordinates
-        coordinates = homogenize(matrix_o_p_v @ coordinates)
-        # if begin[2] > 0 or end[2] > 0:
-        # continue
+    # for node in nodes:
+    # print(f"w_begin = {begin}, w_end = {end}")
+    # coordinates = node.coordinates
+    # coordinates = homogenize(matrix_o_p_v @ coordinates)
+    # if begin[2] > 0 or end[2] > 0:
+    # continue
 
     for triangle in triangles:
-        print(triangle)
+        current_triangle_nodes = triangle.nodes()
+        for node in current_triangle_nodes:
+            coordinates = node.coordinates
+            coordinates = homogenize(matrix_o_p_v @ coordinates)
+        screen_cordinates = list(
+            map(
+                lambda x: homogenize(matrix_o_p_v @ x.coordinates),
+                current_triangle_nodes,
+            )
+        )
+        colour = triangle.colour
+        coordinates = list(map(lambda x: x[:2], screen_cordinates))
+        pg.draw.polygon(screen, colour, coordinates, 0)
     # print(f"begin = {begin}, end = {end}")
     # pg.draw.circle(screen, (255, 0, 0), begin[:2].astype(int), 3)
     # pg.draw.circle(screen, (255,0,0), end[:2].astype(int),3)
@@ -40,5 +47,5 @@ def draw(screen, object_m, projection, camera, view, nodes, triangles):
 
 def close_on_exit(event):
     if event.type == pg.QUIT:
-        running = False
+        raise Exception
         pg.quit()

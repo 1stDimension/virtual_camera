@@ -5,7 +5,7 @@ from config import TRANSLATION_STEP, ROTATION_STEP, DIMENSIONS, WIDTH, HEIGHT
 import pygame as pg
 import numpy as np
 
-NODES, TRIANGLES = init()
+NODES, TRIANGLES, COLOURS = init()
 # nodes = [n0, n1, n2, n3, n4, n5, n6, n7]
 ### END SQUARE
 # matrix multiplication
