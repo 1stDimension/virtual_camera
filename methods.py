@@ -15,6 +15,7 @@ def normal(triangle):
 
 def implicit_plane_function(point, triangle):
     n = normal(triangle)
+    # Possible errors
     return (point - triangle.one) @ n
 
 
