@@ -52,6 +52,7 @@ def draw(screen, object_m, projection, camera, view, nodes, triangles):
     # if begin[2] > 0 or end[2] > 0:
     # continue
 
+    print(camera)
     for triangle in triangles:
         draw_triangle(screen, matrix_o_p_v, triangle)
     # print(f"begin = {begin}, end = {end}")
