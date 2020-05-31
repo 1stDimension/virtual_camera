@@ -7,8 +7,8 @@ import numpy as np
 
 def normal(triangle):
     # nodes = triangle.nodes()
-    edgeOne = triangle.two - triangle.one
-    edgeTwo = triangle.tree - triangle.one
+    edgeOne = triangle.two.coordinates[:3] - triangle.one.coordinates[:3]
+    edgeTwo = triangle.tree.coordinates[:3] - triangle.one.coordinates[:3]
     # posible place of error
     return np.cross(edgeOne, edgeTwo)
 
@@ -16,7 +16,7 @@ def normal(triangle):
 def implicit_plane_function(point, triangle):
     n = normal(triangle)
     # Possible errors
-    return (point - triangle.one) @ n
+    return (point - triangle.one.coordinates[:3]) @ n
 
 
 def homogenize(vector):
@@ -53,6 +53,7 @@ def draw(screen, object_m, projection, camera, view, nodes, triangles):
     # continue
 
     print(camera)
+    eye_position = camera[-1, :3]
     for triangle in triangles:
         draw_triangle(screen, matrix_o_p_v, triangle)
     # print(f"begin = {begin}, end = {end}")

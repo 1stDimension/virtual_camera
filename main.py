@@ -4,6 +4,7 @@ from methods import draw, close_on_exit
 from config import TRANSLATION_STEP, ROTATION_STEP, DIMENSIONS, WIDTH, HEIGHT
 import pygame as pg
 import numpy as np
+import bsp
 
 NODES, TRIANGLES, COLOURS = init()
 # nodes = [n0, n1, n2, n3, n4, n5, n6, n7]
@@ -73,6 +74,11 @@ camera = np.identity(4)
 
 ### Move to the left
 screen = pg.display.set_mode(DIMENSIONS)
+
+tree = bsp.BSPTree(TRIANGLES[0])
+
+for triangle in TRIANGLES[1:]:
+    tree.add(triangle)
 
 draw(screen, object_matrix, projection_matrix, camera, view_matrix, NODES, TRIANGLES)
 
