@@ -10,25 +10,27 @@ class BSPTree(object):
         self.this: Triangle = triangle
 
     def draw(self, eye, matrix, screen):
-        if self.empty():
-            return
         p = implicit_plane_function(eye, self.this)
         if p < 0:
-            print(f"p < 0; p = {p}")
-            self.plus.draw(eye, matrix, screen)
+            # print(f"p < 0; p = {p}")
+            if self.plus is not None:
+                self.plus.draw(eye, matrix, screen)
             draw_triangle(screen, matrix, self.this)
-            self.minus.draw(eye, matrix, screen)
+            if self.minus is not None:
+                self.minus.draw(eye, matrix, screen)
         else:
-            print(f"p > 0; p = {p}")
-            self.minus.draw(eye, matrix, screen)
+            # print(f"p > 0; p = {p}")
+            if self.minus is not None:
+                self.minus.draw(eye, matrix, screen)
             draw_triangle(screen, matrix, self.this)
-            self.plus.draw(eye, matrix, screen)
+            if self.plus is not None:
+                self.plus.draw(eye, matrix, screen)
 
     def add(self, triangle: Triangle):
         nodes = triangle.nodes()
-        f_a = implicit_plane_function(nodes[0].coordinates[:3], triangle)
-        f_b = implicit_plane_function(nodes[1].coordinates[:3], triangle)
-        f_c = implicit_plane_function(nodes[2].coordinates[:3], triangle)
+        f_a = implicit_plane_function(nodes[0].coordinates[:3], self.this)
+        f_b = implicit_plane_function(nodes[1].coordinates[:3], self.this)
+        f_c = implicit_plane_function(nodes[2].coordinates[:3], self.this)
         if abs(f_a) < np.finfo(float).eps:
             f_a = 0
         if abs(f_b) < np.finfo(float).eps:
@@ -36,19 +38,21 @@ class BSPTree(object):
         if abs(f_c) < np.finfo(float).eps:
             f_c = 0
         if f_a <= 0 and f_b <= 0 and f_c <= 0:
-            print("eye before plain")
+            # print("eye before plain")
             if self.minus is None:
                 self.minus = BSPTree(triangle)
             else:
                 self.minus.add(triangle)
         elif f_a >= 0 and f_b >= 0 and f_c >= 0:
-            print("points behind plain")
+            # print("points behind plain")
             if self.plus is None:
                 self.plus = BSPTree(triangle)
             else:
                 self.plus.add(triangle)
         else:
             # cut triangles
+            if f_a * f_c >= 0
+            
             print("plains intersect")
 
     def empty(self):

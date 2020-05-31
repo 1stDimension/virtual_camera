@@ -40,7 +40,7 @@ def draw_triangle(screen, matrix, triangle):
     pg.draw.polygon(screen, colour, coordinates, 0)
 
 
-def draw(screen, object_m, projection, camera, view, nodes, triangles):
+def draw(screen, object_m, projection, camera, view, nodes, triangles, tree):
     matrix_o_p_v = object_m @ projection @ np.linalg.inv(camera) @ view
     screen.fill(0)
     # print("Camera")
@@ -54,8 +54,10 @@ def draw(screen, object_m, projection, camera, view, nodes, triangles):
 
     print(camera)
     eye_position = camera[-1, :3]
-    for triangle in triangles:
-        draw_triangle(screen, matrix_o_p_v, triangle)
+
+    tree.draw(eye_position, matrix_o_p_v, screen)
+    # for triangle in triangles:
+    # draw_triangle(screen, matrix_o_p_v, triangle)
     # print(f"begin = {begin}, end = {end}")
     # pg.draw.circle(screen, (255, 0, 0), begin[:2].astype(int), 3)
     # pg.draw.circle(screen, (255,0,0), end[:2].astype(int),3)

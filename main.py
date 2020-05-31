@@ -80,7 +80,16 @@ tree = bsp.BSPTree(TRIANGLES[0])
 for triangle in TRIANGLES[1:]:
     tree.add(triangle)
 
-draw(screen, object_matrix, projection_matrix, camera, view_matrix, NODES, TRIANGLES)
+draw(
+    screen,
+    object_matrix,
+    projection_matrix,
+    camera,
+    view_matrix,
+    NODES,
+    TRIANGLES,
+    tree,
+)
 
 running = True
 while running:
@@ -185,4 +194,5 @@ while running:
                 view_matrix,
                 NODES,
                 TRIANGLES,
+                tree,
             )
