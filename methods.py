@@ -5,12 +5,19 @@ import pygame as pg
 import numpy as np
 
 
+def normalize(v):
+    norm = np.linalg.norm(v)
+    if norm == 0:
+        return v
+    return v / norm
+
+
 def normal(triangle):
     # nodes = triangle.nodes()
     edgeOne = triangle.two.coordinates[:3] - triangle.one.coordinates[:3]
     edgeTwo = triangle.tree.coordinates[:3] - triangle.one.coordinates[:3]
     # posible place of error
-    return np.cross(edgeOne, edgeTwo)
+    return normalize(np.cross(edgeOne, edgeTwo))
 
 
 def d_of_plane_equation(triangle):
@@ -20,7 +27,7 @@ def d_of_plane_equation(triangle):
 def implicit_plane_function(point, triangle):
     n = normal(triangle)
     # Possible errors
-    return (point - triangle.one.coordinates[:3]) @ n
+    return n @ (point - triangle.one.coordinates[:3])
 
 
 def homogenize(vector):
@@ -42,6 +49,7 @@ def draw_triangle(screen, matrix, triangle):
         return
     coordinates = list(map(lambda x: x[:2], screen_cordinates))
     pg.draw.polygon(screen, colour, coordinates, 0)
+    pg.draw.polygon(screen, (255, 255, 255), coordinates, 1)
 
 
 def draw(screen, object_m, projection, camera, view, nodes, triangles, tree):
@@ -57,7 +65,9 @@ def draw(screen, object_m, projection, camera, view, nodes, triangles, tree):
     # continue
 
     print(camera)
-    eye_position = camera[-1, :3]
+    # eye_position = camera[:3, -1]
+    eye_position = np.array([0, 0, 150])
+    print(f"eye_position = {eye_position}")
 
     tree.draw(eye_position, matrix_o_p_v, screen)
     # for triangle in triangles:

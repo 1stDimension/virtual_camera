@@ -6,6 +6,10 @@ from methods import draw_triangle, implicit_plane_function, normal, d_of_plane_e
 def compute_A(a, c, triangle):
     D = d_of_plane_equation(triangle)
     n = normal(triangle)
+    if n @ (c - a) == 0:
+        print(f"c = {c}, a = {a}")
+        print(f"c - a = {c - a}")
+        print(f"n = {n}")
     t = -(n @ a + D) / (n @ (c - a))
     A = a + t * (c - a)
     return A
@@ -19,6 +23,7 @@ class BSPTree(object):
 
     def draw(self, eye, matrix, screen):
         p = implicit_plane_function(eye, self.this)
+        # print(f"eye = {eye}, p = {p}")
         if p < 0:
             # print(f"p < 0; p = {p}")
             if self.plus is not None:
@@ -63,13 +68,13 @@ class BSPTree(object):
         else:
             # cut triangles
             if f_a * f_c >= 0:
-                f_a, f_c = f_c, f_a
-                a, c = c, a
+                f_b, f_c = f_c, f_b
+                b, c = c, b
                 f_a, f_b = f_b, f_a
                 a, b = b, a
             elif f_b * f_c >= 0:
-                f_b, f_c = f_c, f_b
-                b, c = c, b
+                f_a, f_c = f_c, f_a
+                a, c = c, a
                 f_a, f_b = f_b, f_a
                 a, b = b, a
             # Compute A

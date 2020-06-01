@@ -60,19 +60,21 @@ def init() -> List[Type[Node]]:
 
     # Top plane
 
-    t4 = Triangle(n3, n2, n6, blue, "t4")
-    t5 = Triangle(n6, n7, n3, blue, "t5")
+    t4 = Triangle(n6, n2, n3, blue, "t4")
+    # t4 = Triangle(n3, n2, n6, blue, "t4")
+    # t5 = Triangle(n6, n7, n3, blue, "t5")
+    t5 = Triangle(n3, n7, n6, blue, "t5")
 
     # Bottom plane
 
-    # t6 = Triangle(n5, n1, n0, blue)
-    t6 = Triangle(n0, n1, n5, blue, "t6")
-    # t7 = Triangle(n0, n4, n5, blue)
-    t7 = Triangle(n5, n2, n0, blue, "t7")
+    t6 = Triangle(n5, n1, n0, blue, "t6")
+    # t6 = Triangle(n0, n1, n5, blue, "t6")
+    t7 = Triangle(n0, n4, n5, blue, "t7")
+    # t7 = Triangle(n5, n2, n0, blue, "t7")
 
     # Left plane
     t8 = Triangle(n7, n4, n0, red, "t8")
-    t9 = Triangle(n0, n3, n7, red, "t99")
+    t9 = Triangle(n0, n3, n7, red, "t9")
     # t9 = Triangle(n7, n3, n0, red)
 
     # right plane
@@ -119,10 +121,11 @@ def init() -> List[Type[Node]]:
     all_nodes = []
     colours = []
     triangles.extend(right_first_building)
-    # triangles.extend(right_second_building)
-    # triangles.extend(left_second_building)
-    # triangles.extend(left_first_building)
-    # triangles.extend(road)
+    # triangles.reverse()
+    triangles.extend(right_second_building)
+    triangles.extend(left_second_building)
+    triangles.extend(left_first_building)
+    triangles.extend(road)
 
     for triangle in triangles:
         all_nodes.extend(triangle.nodes())
