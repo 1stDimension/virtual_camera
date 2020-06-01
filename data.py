@@ -60,10 +60,10 @@ def init() -> List[Type[Node]]:
 
     # Top plane
 
-    t4 = Triangle(n6, n2, n3, blue, "t4")
-    # t4 = Triangle(n3, n2, n6, blue, "t4")
-    # t5 = Triangle(n6, n7, n3, blue, "t5")
-    t5 = Triangle(n3, n7, n6, blue, "t5")
+    # t4 = Triangle(n6, n2, n3, blue, "t4")
+    t4 = Triangle(n3, n2, n6, blue, "t4")
+    t5 = Triangle(n6, n7, n3, blue, "t5")
+    # t5 = Triangle(n3, n7, n6, blue, "t5")
 
     # Bottom plane
 

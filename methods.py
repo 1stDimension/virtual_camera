@@ -53,6 +53,7 @@ def draw_triangle(screen, matrix, triangle):
 
 
 def draw(screen, object_m, projection, camera, view, nodes, triangles, tree):
+    tmp = np.linalg.inv(camera) @ view[:, -1]
     matrix_o_p_v = object_m @ projection @ np.linalg.inv(camera) @ view
     screen.fill(0)
     # print("Camera")
@@ -65,8 +66,9 @@ def draw(screen, object_m, projection, camera, view, nodes, triangles, tree):
     # continue
 
     print(camera)
+    print(tmp)
     # eye_position = camera[:3, -1]
-    eye_position = np.array([0, 0, 150])
+    eye_position = -1 * tmp[:-1]
     print(f"eye_position = {eye_position}")
 
     tree.draw(eye_position, matrix_o_p_v, screen)
