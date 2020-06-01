@@ -24,12 +24,13 @@ class Edge(object):
 
 
 class Triangle(object):
-    def __init__(self, one, two, tree, colour=(0, 255, 0)):
+    def __init__(self, one, two, tree, colour=(0, 255, 0), name="NoName"):
         self.one = copy.deepcopy(one)
         self.two = copy.deepcopy(two)
         self.tree = copy.deepcopy(tree)
         self.no = [self.one, self.two, self.tree]
         self.colour = colour
+        self.name = name
 
     def setColour(self, colour):
         self.colour = colour

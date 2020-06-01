@@ -19,7 +19,6 @@ class BSPTree(object):
 
     def draw(self, eye, matrix, screen):
         p = implicit_plane_function(eye, self.this)
-        # Deviation
         if p < 0:
             # print(f"p < 0; p = {p}")
             if self.plus is not None:
@@ -93,7 +92,7 @@ class BSPTree(object):
                 if self.plus is None:
                     self.plus = BSPTree(T3)
                 else:
-                    self.minus.add(T3)
+                    self.plus.add(T3)
             else:
                 if self.plus is None:
                     self.plus = BSPTree(T1)
