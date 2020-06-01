@@ -13,6 +13,10 @@ def normal(triangle):
     return np.cross(edgeOne, edgeTwo)
 
 
+def d_of_plane_equation(triangle):
+    return -1 * normal(triangle) @ triangle.one.coordinates[:3]
+
+
 def implicit_plane_function(point, triangle):
     n = normal(triangle)
     # Possible errors

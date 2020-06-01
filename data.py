@@ -47,15 +47,16 @@ def init() -> List[Type[Node]]:
     n7 = Node([10, 25, 75, 1])
 
     # Front plane of square first
-    # t0 = Triangle(n2, n1, n0, green)
-    t0 = Triangle(n0, n1, n2, green)
-    t1 = Triangle(n2, n3, n0, green)
+    t0 = Triangle(n2, n1, n0, green)
+    # t0 = Triangle(n0, n1, n2, green)
+    # t1 = Triangle(n2, n3, n0, green)
+    t1 = Triangle(n0, n3, n2, green)
 
     # Back plane of square second
-    t2 = Triangle(n6, n5, n4, green)
-    # t2 = Triangle(n4, n5, n6, green)
-    t3 = Triangle(n4, n7, n6, green)
-    # t3 = Triangle(n6, n7, n4, green)
+    # t2 = Triangle(n6, n5, n4, green)
+    t2 = Triangle(n4, n5, n6, green)
+    t3 = Triangle(n6, n7, n4, green)
+    # t3 = Triangle(n4, n7, n6, green)
 
     # Top plane
 
@@ -64,22 +65,22 @@ def init() -> List[Type[Node]]:
 
     # Bottom plane
 
-    t6 = Triangle(n5, n1, n0, blue)
-    # t6 = Triangle(n0, n1, n5, blue)
-    t7 = Triangle(n0, n4, n5, blue)
-    # t7 = Triangle(n5, n2, n0, blue)
+    # t6 = Triangle(n5, n1, n0, blue)
+    t6 = Triangle(n0, n1, n5, blue)
+    # t7 = Triangle(n0, n4, n5, blue)
+    t7 = Triangle(n5, n2, n0, blue)
 
     # Left plane
-    # t8 = Triangle(n7, n4, n0, red)
-    # t9 = Triangle(n0, n3, n7, red)
+    t8 = Triangle(n7, n4, n0, red)
+    t9 = Triangle(n0, n3, n7, red)
     # t9 = Triangle(n7, n3, n0, red)
 
     # right plane
 
-    # t10 = Triangle(n1, n5, n6, red)
-    # t11 = Triangle(n6, n2, n1, red)
+    t10 = Triangle(n1, n5, n6, red)
+    t11 = Triangle(n6, n2, n1, red)
 
-    right_first_building = [t0, t1, t2, t3, t4, t5, t6, t7]  # t8, t9, t10, t11]
+    right_first_building = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11]
 
     right_second_building: list = copy.deepcopy(right_first_building)
     list(map(move_z_triangle, right_second_building))
