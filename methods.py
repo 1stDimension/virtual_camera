@@ -65,11 +65,19 @@ def draw(screen, object_m, projection, camera, view, nodes, triangles, tree):
     # if begin[2] > 0 or end[2] > 0:
     # continue
 
-    print(camera)
-    print(tmp)
+    print(f"camera = \n{camera}")
+    print(f"tmp = \n{tmp}")
+    print(f"view = \n{view}")
+    e = np.array([0, 0, 150, 1])
+    t = camera @ e
+    print(f"camera @ e =\n{camera @ e}")
     # eye_position = camera[:3, -1]
-    eye_position = -1 * tmp[:-1]
+    eye_position = t[:-1]  # -1 * tmp[:-1]
     print(f"eye_position = {eye_position}")
+
+    # coo = homogenize(matrix_o_p_v @ e)
+    # m = list(map(lambda x: int(x), coo))
+    # pg.draw.circle(screen, (0, 0, 255), m[:2], 5)
 
     tree.draw(eye_position, matrix_o_p_v, screen)
     # for triangle in triangles:
